@@ -34,3 +34,12 @@ body {
   #myBtn {
       position: absolute;
   }
+#main-canvas {
+
+}
+
+#insert-element-dropdown {
+    background-color:green;
+    border-radius:10%;
+}
+
