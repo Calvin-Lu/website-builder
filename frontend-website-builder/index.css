@@ -2,6 +2,12 @@ body {
 
 }
 
-#add-text-button {
-    
+#main-canvas {
+
 }
+
+#insert-element-dropdown {
+    background-color:green;
+    border-radius:10%;
+}
+
