@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", main);
 
 function main() {
     // Make the DIV element draggable:
-    dragElement(document.querySelector("#resize-test2"));
+    resizeTest =  new Element(document.querySelector("#resize-test2"));
 }
 
 class Element {
