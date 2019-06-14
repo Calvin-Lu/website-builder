@@ -1,21 +1,49 @@
 document.addEventListener("DOMContentLoaded", main);
 
+builderApp = {
+  activeElements: [],
+}
+
 function main() {
     // Make the DIV element draggable:
     resizeTest =  new Element(document.querySelector("#resize-test2"));
+
+    // Toolbox
+    dragBtn = document.querySelector('#drag-element-button').children[0];
+    dragBtn.addEventListener("click", toolBox.enableDrag);
+    resizeBtn = document.querySelector('#resize-element-button').children[0];
+    resizeBtn.addEventListener("click", toolBox.enableResize);
+}
+
+let toolBox = {
+  enableDrag: () => {
+    let {activeElements} = builderApp;
+    activeElements.forEach(element => {
+      element.enableDrag();
+    });
+  },
+  enableResize: () => {
+    let {activeElements} = builderApp;
+    activeElements.forEach(element => {
+      element.enableResize();
+    });
+  }
 }
 
 class Element {
   constructor(element) {
-      this.element = element;
-      this.element.addEventListener("mousedown", this.dragMouseDown.bind(this));
-      this.element.style.position = "absolute";
-      this.positions = {pos1: 0, pos2: 0, pos3: 0, pos4: 0};
-
       // store functions so they can be referenced later
       this.dragMouseDownHandler = this.dragMouseDown.bind(this);
       this.elementDragHandler = this.elementDrag.bind(this);
       this.closeDragElementHandler = this.closeDragElement.bind(this);
+      this.enableResizeHandler = this.enableResize.bind(this);
+
+      // default settings
+      this.element = element;
+      this.element.addEventListener("mousedown", this.dragMouseDownHandler);
+      this.element.style.position = "absolute";
+      this.positions = {pos1: 0, pos2: 0, pos3: 0, pos4: 0};
+      builderApp.activeElements.push(this);
   }
 
   dragMouseDown(e) {
@@ -48,10 +76,18 @@ class Element {
     this.element.removeEventListener("mouseup", this.closeDragElementHandler);
   }
 
-  resizeable(e) {
-    // alert("hello")
-    this.style.resize = "both";
-    this.removeEventListener("mousedown", this.dragMouseDown);
+  enableDrag() {
+    this.element.style.cursor = "move";
+    this.element.removeEventListener("mousedown", this.enableResizeHandler);
+    this.element.addEventListener("mousedown", this.dragMouseDownHandler);
+  }
+
+  enableResize(e) {
+    this.element.style.resize = "both";
+    this.element.style.cursor = "se-resize";
+    this.element.style.overflow = "auto";
+    this.element.removeEventListener("mousedown", this.dragMouseDownHandler);
+    this.closeDragElement();
   }
 }
 
