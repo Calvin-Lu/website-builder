@@ -11,6 +11,11 @@ class Element {
       this.element.addEventListener("mousedown", this.dragMouseDown.bind(this));
       this.element.style.position = "absolute";
       this.positions = {pos1: 0, pos2: 0, pos3: 0, pos4: 0};
+
+      // store functions so they can be referenced later
+      this.dragMouseDownHandler = this.dragMouseDown.bind(this);
+      this.elementDragHandler = this.elementDrag.bind(this);
+      this.closeDragElementHandler = this.closeDragElement.bind(this);
   }
 
   dragMouseDown(e) {
@@ -19,8 +24,8 @@ class Element {
     // get the mouse cursor position at startup:
     this.positions.pos3 = e.clientX;
     this.positions.pos4 = e.clientY;
-    this.element.addEventListener("mouseup", this.closeDragElement.bind(this));
-    this.element.addEventListener("mousemove", this.elementDrag.bind(this));
+    this.element.addEventListener("mouseup", this.closeDragElementHandler);
+    this.element.addEventListener("mousemove", this.elementDragHandler);
   }
   
   elementDrag(e) {
@@ -32,7 +37,6 @@ class Element {
     this.positions.pos3 = e.clientX;
     this.positions.pos4 = e.clientY;
     
-    // console.log(element.offsetTop - pos2);
     // set the element's new position:
     this.element.style.top = (this.element.offsetTop - this.positions.pos2) + "px";
     this.element.style.left = (this.element.offsetLeft - this.positions.pos1) + "px";
@@ -40,8 +44,8 @@ class Element {
   
   closeDragElement() {
     // stop moving when mouse button is released:
-    this.element.removeEventListener("mouseup", this.closeDragElement.bind(this));
-    this.element.removeEventListener("mousemove", this.elementDrag.bind(this));
+    this.element.removeEventListener("mousemove", this.elementDragHandler);
+    this.element.removeEventListener("mouseup", this.closeDragElementHandler);
   }
 
   resizeable(e) {
