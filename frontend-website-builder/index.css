@@ -38,7 +38,7 @@ body {
 
 }
 
-#insert-element-dropdown {
+.my-navbar-button {
     background-color:green;
     border-radius:10%;
 }

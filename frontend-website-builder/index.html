@@ -9,10 +9,6 @@
     <script src="index.js"></script>
 </head>
 <body>
-
-    <div id="resize-test2">
-        <p>Click the button, then drag the bottom right corner to resize this DIV element.</p>
-    </div>
     <div id="bootstrap-override">
 
         <!-- Navigation bar-->
@@ -32,7 +28,7 @@
                     <li class="nav-item active"><a class="nav-link" href="#">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">About</a></li>
                     <li class="nav-item mr-5"><a class="nav-link" href="#">Help</a></li>
-                    <li class="nav-item dropdown" id="insert-element-dropdown">
+                    <li class="nav-item dropdown my-navbar-button" id="insert-element-dropdown">
                         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Insert Element</a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="#">Paragraph/Text</a></li>
@@ -41,6 +37,12 @@
                             <li><a class="dropdown-item" href="#">User Input Field</a></li>
                         </ul>
                     </li>
+                    <li class="nav-item my-navbar-button ml-5" id="drag-element-button">
+                        <a class="nav-link">Drag</a>
+                    </li>
+                    <li class="nav-item my-navbar-button ml-2" id="resize-element-button">
+                        <a class="nav-link">Resize</a>
+                    </li>
                 </ul>
                     
 
@@ -48,6 +50,10 @@
         </nav>
 
         <div id="main-canvas">
+
+            <div id="resize-test2">
+                <p>Click the button, then drag the bottom right corner to resize this DIV element.</p>
+             </div>
             <!--
             <button type="button" class="btn btn-primary" id="add-text-button">Add Text Field</button>
             -->
