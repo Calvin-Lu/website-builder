@@ -3,6 +3,9 @@ document.addEventListener("DOMContentLoaded", main);
 function main() {
     // Make the DIV element draggable:
     resizeTest =  new Element(document.querySelector("#resize-test2"));
+
+    const insertParagraphButton = document.querySelector("#insert-paragraph-dropdown-item")
+    insertParagraphButton.addEventListener('click', function(){ insertElement('p')})
 }
 
 class Element {
